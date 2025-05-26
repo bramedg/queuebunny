@@ -22,6 +22,26 @@ export class AmqpService implements OnModuleInit, OnModuleDestroy {
     await this.connection.close();
   }
 
+  async publishMessage(
+    exchange: string,
+    routingKey: string,
+    request: any,
+    headers?: amqp.Options.AssertQueue['headers'],
+  ): Promise<void> {
+    await firstValueFrom(this.connectionReady);
+
+    // Publish the request message
+    this.channel.publish(
+      exchange,
+      routingKey,
+      Buffer.from(JSON.stringify(request)),
+      {
+        headers,
+      },
+    );
+
+  }
+
   async listenForRequests(
     exchange: string,
     requestRoutingKey: string,

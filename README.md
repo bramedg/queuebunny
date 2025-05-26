@@ -50,8 +50,8 @@ queuebunny echo.test "echo {{body.valueToEcho}}"
 
 ### 6. Create a tap queue for the response
 
-Bind to exchange: amq.topic
-Bind to routing key: response.key
+- Bind to exchange: amq.topic
+- Bind to routing key: response.key
 
 ---
 
@@ -74,6 +74,9 @@ Assuming everything is set up properly, you'll get a response to your tap queue:
     "output": "Hello World" 
   }
 ```
+
+## Producer  Mode
+If you want to continually stream output to a queue, use the ```---producer``` switch.  The routing key will become the target routing key.  As there is no input, the command line template will need to be a plain command without template arguments.
 
 ## 📜 License
 
