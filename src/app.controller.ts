@@ -110,7 +110,12 @@ export class AppController {
           } else {
             Logger.log('Command executed successfully');
           }
-          process.exit(0);
+
+          setTimeout(() => {
+            Logger.log('Exiting process after command completion');
+            process.exit(0);
+          }, 1000);
+          
         });
 
         Logger.log(`QueueBunny producer started for routing key: ${routingKey}`);
@@ -137,10 +142,11 @@ export class AppController {
         this.startConsumerMode(routingKey, commandStringTemplate);
       }
     } else {
-      Logger.error('Routing key and command string template are required');
-      Logger.error('Usage: queuebunny <routingKey> "<commandStringTemplate> [--producer]"');
-      Logger.error('Example: queuebunny "my.routing.key" "echo {{body.message}}"');
-      Logger.error('If you want to run in producer mode, use the --producer flag');
+      console.log('Routing key and command string template are required');
+      console.log('Usage: queuebunny <routingKey> "<commandStringTemplate> [--producer]"');
+      console.log('Example: queuebunny "my.routing.key" "echo {{body.message}}"');
+      console.log('If you want to run in producer mode, use the --producer flag');
+      process.exit(1);
     }
   }
 }
