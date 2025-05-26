@@ -1,6 +1,6 @@
 {
   "name": "@bramedg/queuebunny",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "QueueBunny is a lightweight RPC connector for RabbitMQ to your command line applications.",
   "author": "Daniel Brame",
   "private": false,
