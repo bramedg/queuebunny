@@ -57,9 +57,17 @@ export class AppController {
         Logger.log(`Executing command: ${commandString}`);
 
         const output = execSync(commandString);
+
+        let processedOutput = output.toString();
+        try {
+          processedOutput = JSON.parse(processedOutput);
+        } catch (error) {
+          Logger.warn('Output not JSON format.  Leaving as string');
+        }
+
         const response = {
           status: 'success',
-          output: output.toString(),
+          output: processedOutput,
         };
 
         return response;
