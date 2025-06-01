@@ -60,7 +60,7 @@ export class AmqpService implements OnModuleInit, OnModuleDestroy {
           this.channel.consume(INSTANCE_REQUEST_QUEUE, (msg) => {
             this.channel.ack(msg);
             const response = callback(msg);
-            if (response) {
+            if (response && msg.properties.replyTo) {
               this.channel.publish(
                 exchange,
                 msg.properties.replyTo,
